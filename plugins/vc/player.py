@@ -289,17 +289,34 @@ async def skip_track(_, m: Message):
 
 
 @Client.on_message(main_filter
-                   & self_or_contact_filter
-                   & filters.regex("^!join$"))
-async def join_group_call(client, m: Message):
-    group_call = mp.group_call
-    group_call.client = Client
-    if group_call.is_connected:
-        await m.reply_text(f"{emoji.ROBOT} already joined a voice chat")
-        return
-    await group_call.start(m.chat.id)
-    await m.delete()
 
+                   & self_or_contact_filter
+
+                   & filters.regex("^!join$"))
+
+async def join_group_call(client, m: Message):
+
+    group_call = mp.group_call
+
+    if not group_call:
+
+        mp.group_call = GroupCallFactory(client).get_file_group_call()
+
+        mp.group_call.add_handler(network_status_changed_handler,
+
+                                  GroupCallFileAction.NETWORK_STATUS_CHANGED)
+
+        mp.group_call.add_handler(playout_ended_handler,
+
+                                  GroupCallFileAction.PLAYOUT_ENDED)
+
+        await mp.group_call.start(m.chat.id)
+
+        await m.delete()
+
+    if group_call and group_call.is_connected:
+
+        await m.reply_text(f"{emoji.ROBOT} already joined a voice chat")
 
 @Client.on_message(main_filter
                    & self_or_contact_filter
