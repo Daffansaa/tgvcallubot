@@ -293,7 +293,7 @@ async def skip_track(_, m: Message):
                    & filters.regex("^!join$"))
 async def join_group_call(client, m: Message):
     group_call = mp.group_call
-    group_call.client = client
+    group_call.client = Client
     if group_call.is_connected:
         await m.reply_text(f"{emoji.ROBOT} already joined a voice chat")
         return
