@@ -10,7 +10,7 @@ RUN python -m pip install --upgrade pip
 RUN python -m pip install wheel Pyrogram TgCrypto
 RUN python -m pip install pytgcalls ffmpeg-python psutil
 
-RUN wget -q https://github.com/ramadhani892/tgvcallbot/archive/dev.tar.gz && \
+RUN wget -q https://github.com/Daffansaa/tgvcallbot/archive/dev.tar.gz && \
     tar xf dev.tar.gz && rm dev.tar.gz
 
 WORKDIR /tgvcallbot-dev
