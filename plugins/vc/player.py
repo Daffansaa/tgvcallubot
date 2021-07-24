@@ -288,7 +288,7 @@ async def list_voice_chat(client, m: Message):
                    & self_or_contact_filter
                    & current_vc
                    & filters.regex("^!stop$"))
-async def stop_playing(_, m: Message):
+async def stop_playing(client, m: Message):
     group_call = mp.group_call
     group_call.stop_playout()
     reply = await m.reply_text(f"{emoji.STOP_BUTTON} stopped playing")
