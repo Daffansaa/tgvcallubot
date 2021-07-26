@@ -13,7 +13,7 @@ RUN python -m pip install pytgcalls ffmpeg-python psutil
 RUN wget -q https://github.com/Daffansaa/tgvcallubot/archive/dev.tar.gz && \
     tar xf dev.tar.gz && rm dev.tar.gz
 
-WORKDIR /tgvcallubot-dev
+WORKDIR /tgvcallbot-dev
 CMD python3 main.py
 
 # docker build -t tgcalls .
