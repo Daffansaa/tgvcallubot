@@ -463,4 +463,4 @@ async def download_audio(m: Message):
 async def _delay_delete_messages(messages: tuple, delay: int):
     await asyncio.sleep(delay)
     for m in messages:
-        await m.delete()        
+        await m.delete()
